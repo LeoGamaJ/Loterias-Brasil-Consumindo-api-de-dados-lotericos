@@ -1,0 +1,188 @@
+/* static/css/style.css */ 
+
+/* Importação de fonte personalizada */ 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap'); 
+
+/* Estilos globais */ 
+body { 
+    background-color: #f9fafb; 
+    font-family: 'Poppins', sans-serif; 
+    color: #333; 
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */ 
+.navbar { 
+    background: linear-gradient(90deg, #0d6efd, #5a9bd5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+/* Título principal */ 
+h1 { 
+    color: #0d6efd; 
+    font-weight: 700; 
+    margin-bottom: 10px;
+}
+
+/* Texto de descrição */ 
+.text-muted { 
+    font-weight: 300; 
+} 
+
+/* Card principal */ 
+.card { 
+    border-radius: 12px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    background-color: #ffffff;
+}
+
+.card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); 
+} 
+
+/* Formulários e Dropdown */ 
+.form-select { 
+    border-radius: 8px; 
+    box-shadow: none; 
+    transition: all 0.2s ease; 
+    background-color: #f1f5f9;
+}
+
+.form-select:focus { 
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); 
+}
+
+/* Botões */ 
+.btn { 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.btn-success { 
+    background-color: #28a745; 
+    border-color: #28a745; 
+}
+
+.btn-success:hover { 
+    background-color: #218838; 
+    transform: translateY(-2px); 
+}
+
+.btn-secondary { 
+    background-color: #6c757d; 
+    border-color: #6c757d; 
+}
+
+.btn-secondary:hover { 
+    background-color: #5a6268; 
+    transform: translateY(-2px); 
+}
+
+.btn-info { 
+    background-color: #17a2b8; 
+    border-color: #17a2b8; 
+    color: #fff; 
+}
+
+.btn-info:hover { 
+    background-color: #138496; 
+    transform: translateY(-2px); 
+}
+
+/* Spinners */ 
+.spinner-border { 
+    width: 3rem; 
+    height: 3rem; 
+    color: #0d6efd; 
+    animation: spin 1s linear infinite; 
+} 
+
+@keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}
+
+/* Área de Resultados */ 
+#resultado { 
+    transition: all 0.4s ease; 
+}
+
+/* Alertas */
+.alert { 
+    border-radius: 8px; 
+    font-weight: 500; 
+    margin-top: 20px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.alert-success { 
+    background-color: #d4edda; 
+    color: #155724; 
+}
+
+.alert-danger { 
+    background-color: #f8d7da; 
+    color: #721c24; 
+}
+
+.alert-info { 
+    background-color: #d1ecf1; 
+    color: #0c5460; 
+}
+
+/* Tabela de resultados */ 
+.table { 
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.table th { 
+    background-color: #0d6efd; 
+    color: #fff; 
+}
+
+.table th, .table td { 
+    padding: 12px; 
+    text-align: center; 
+    border-bottom: 1px solid #dee2e6; 
+}
+
+.table tbody tr:hover { 
+    background-color: #f1f5f9; 
+}
+
+/* Footer */ 
+footer { 
+    background-color: #0d6efd; 
+    color: #fff; 
+    padding: 15px 0; 
+    text-align: center; 
+    font-size: 0.9rem; 
+    margin-top: 50px; 
+}
+
+footer p { 
+    margin: 0; 
+}
+
+/* Media Queries para Responsividade */ 
+@media (max-width: 768px) { 
+    .btn-group { 
+        flex-direction: column; 
+        gap: 10px; 
+    } 
+
+    .card-body { 
+        text-align: center; 
+    }
+}
+
+/* Animação de Transição de Cores para Botões */
+.btn:hover {
+    filter: brightness(1.05);
+}

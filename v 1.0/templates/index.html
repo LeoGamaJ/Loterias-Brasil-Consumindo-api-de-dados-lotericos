@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Loterias - Loterias Brasil</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Loterias Brasil</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <!-- Título Principal -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Consulta de Resultados de Loteria</h1>
+        <p class="text-muted">Confira os resultados mais recentes, históricos e relatórios das principais loterias do Brasil.</p>
+    </div>
+    
+    <!-- Card de Seleção e Botões -->
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h5>Selecione a Loteria</h5>
+        </div>
+        <div class="card-body">
+            <form id="consulta-form">
+                <div class="row g-3">
+                    <!-- Dropdown de Loterias -->
+                    <div class="col-md-6">
+                        <label for="loteria-select" class="form-label">Loteria:</label>
+                        <select class="form-select" id="loteria-select" required>
+                            <option value="" disabled selected>Escolha uma opção...</option>
+                            {% for loteria in loterias %}
+                            <option value="{{ loteria }}">{{ loteria.replace('_', ' ').title() }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="invalid-feedback">Por favor, selecione uma loteria.</div>
+                    </div>
+                    <!-- Botões de Ação -->
+                    <div class="col-md-6 d-flex align-items-end">
+                        <div class="btn-group w-100" role="group">
+                            <button type="submit" class="btn btn-success" id="ultimo-resultado-btn">
+                                <i class="bi bi-search"></i> Último Resultado
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="historico-btn">
+                                <i class="bi bi-clock-history"></i> Histórico
+                            </button>
+                            <button type="button" class="btn btn-info text-white" id="relatorio-btn">
+                                <i class="bi bi-bar-chart"></i> Relatório
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="text-center mt-4" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+
+    <!-- Mensagem de Erro -->
+    <div id="mensagem-erro" class="alert alert-danger mt-4 d-none" role="alert"></div>
+
+    <!-- Área de Resultados -->
+    <div id="resultado" class="mt-5"></div>
+
+    <!-- Gráfico para o Relatório -->
+    <div class="mt-5" id="chart-container" style="display: none;">
+        <h2 class="text-center">Relatório Estatístico</h2>
+        <canvas id="chartDezenas" width="400" height="200"></canvas>
+        <canvas id="chartParesImpares" width="400" height="200" class="mt-4"></canvas>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">&copy; 2024 Loterias Brasil - Todos os direitos reservados.</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<!-- Ícones do Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.js"></script>
+<!-- Chart.js para gráficos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/scripts.js"></script>
+
+</body>
+</html>
