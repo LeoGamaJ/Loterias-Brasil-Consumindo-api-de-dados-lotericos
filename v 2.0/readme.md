@@ -27,7 +27,7 @@ WebLoto é uma aplicação web moderna e intuitiva que fornece resultados atuali
 - Federal
 - Dia de Sorte
 - Super Sete
-- + Milionária
+- +Milionária
 
 ## 🚀 Recursos Principais
 
