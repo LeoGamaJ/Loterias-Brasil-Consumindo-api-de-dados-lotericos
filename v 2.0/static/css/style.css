@@ -1,0 +1,310 @@
+:root {
+    --megasena-color: #209869;
+    --lotofacil-color: #930089;
+    --quina-color: #260085;
+    --lotomania-color: #F78100;
+    --timemania-color: #00FF48;
+    --duplasena-color: #A61324;
+    --federal-color: #004A90;
+    --diadesorte-color: #CB852B;
+    --supersete-color: #A8CF45;
+    --maismilionaria-color: #DEBB00;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+/* Sidebar */
+.sidebar {
+    box-shadow: 2px 0 5px rgba(0,0,0,.1);
+    height: calc(100vh - 56px);
+    position: sticky;
+    top: 56px;
+    padding-top: 1rem;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    border: none;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: 8px !important;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.list-group-item.active {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    border: none;
+}
+
+/* Loteria Icons */
+.loteria-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.megasena { background-color: var(--megasena-color); }
+.lotofacil { background-color: var(--lotofacil-color); }
+.quina { background-color: var(--quina-color); }
+.lotomania { background-color: var(--lotomania-color); }
+.timemania { background-color: var(--timemania-color); }
+.duplasena { background-color: var(--duplasena-color); }
+.federal { background-color: var(--federal-color); }
+.diadesorte { background-color: var(--diadesorte-color); }
+.supersete { background-color: var(--supersete-color); }
+.maismilionaria { background-color: var(--maismilionaria-color); }
+
+/* Cards */
+.card {
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.info-card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    height: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-card h5 {
+    color: #0d6efd;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+.info-card p {
+    margin-bottom: 8px;
+}
+
+.info-card p:last-child {
+    margin-bottom: 0;
+}
+
+.dezenas-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#dezenas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.dezena {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--bs-border-radius-pill);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--bs-white);
+    background: var(--bs-primary);
+    border: 2px solid var(--bs-primary-border-subtle);
+    box-shadow: var(--bs-box-shadow-sm);
+    transition: all 0.2s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(var(--bs-dark-rgb), 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.dezena::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(var(--bs-white-rgb), 0.15), rgba(var(--bs-white-rgb), 0));
+    border-radius: inherit;
+}
+
+.dezena:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--bs-box-shadow);
+}
+
+.megasena .dezena { background: var(--megasena-color); border-color: color-mix(in srgb, var(--megasena-color) 70%, white); }
+.lotofacil .dezena { background: var(--lotofacil-color); border-color: color-mix(in srgb, var(--lotofacil-color) 70%, white); }
+.quina .dezena { background: var(--quina-color); border-color: color-mix(in srgb, var(--quina-color) 70%, white); }
+.lotomania .dezena { background: var(--lotomania-color); border-color: color-mix(in srgb, var(--lotomania-color) 70%, white); }
+.timemania .dezena { background: var(--timemania-color); border-color: color-mix(in srgb, var(--timemania-color) 70%, white); color: var(--bs-dark); }
+.duplasena .dezena { background: var(--duplasena-color); border-color: color-mix(in srgb, var(--duplasena-color) 70%, white); }
+.federal .dezena { background: var(--federal-color); border-color: color-mix(in srgb, var(--federal-color) 70%, white); }
+.diadesorte .dezena { background: var(--diadesorte-color); border-color: color-mix(in srgb, var(--diadesorte-color) 70%, white); }
+.supersete .dezena { background: var(--supersete-color); border-color: color-mix(in srgb, var(--supersete-color) 70%, white); color: var(--bs-dark); }
+.maismilionaria .dezena { background: var(--maismilionaria-color); border-color: color-mix(in srgb, var(--maismilionaria-color) 70%, white); color: var(--bs-dark); }
+
+.premiacoes-container, .info-adicional {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.premiacoes-container h5, .info-adicional h5 {
+    color: #0d6efd;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Loading */
+#loading {
+    margin: 50px 0;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Buttons */
+.btn-outline-primary {
+    border-width: 2px;
+    font-weight: 500;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+/* Modal */
+.modal-content {
+    border: none;
+    border-radius: 12px;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.btn-close {
+    filter: brightness(0) invert(1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        height: auto;
+        position: static;
+    }
+
+    .list-group-item:hover {
+        transform: none;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Table */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #f1f3f5;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+#estatisticas canvas {
+    min-height: 300px;
+}
+
+#historico .table td {
+    vertical-align: middle;
+}
+
+.sidebar {
+    height: calc(100vh - 56px);
+    position: sticky;
+    top: 56px;
+    padding-top: 1rem;
+    overflow-y: auto;
+}
+
+.loteria-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.list-group-item {
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+    border-left-color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+.list-group-item.active {
+    border-left-color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        height: auto;
+        position: static;
+    }
+}
+
+/* Chart */
+canvas {
+    max-height: 400px;
+    width: 100% !important;
+}
