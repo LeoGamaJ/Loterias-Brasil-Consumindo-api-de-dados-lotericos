@@ -8,6 +8,7 @@
 
 WebLoto é uma aplicação web moderna e intuitiva que fornece resultados atualizados e análises estatísticas das loterias da Caixa Econômica Federal. Com uma interface responsiva e amigável, oferece visualizações detalhadas e insights sobre os resultados dos sorteios.
 
+![WebLoto Sobre](./assets/screem_sobre.png)
 ## ✨ Funcionalidades
 
 - 🔄 **Resultados em Tempo Real**: Acompanhe os últimos resultados de todas as modalidades
@@ -29,6 +30,8 @@ WebLoto é uma aplicação web moderna e intuitiva que fornece resultados atuali
 - Super Sete
 - +Milionária
 
+![WebLoto principal](./assets/screem_principal.png)
+
 ## 🚀 Recursos Principais
 
 ### Visualização de Resultados
@@ -42,6 +45,11 @@ WebLoto é uma aplicação web moderna e intuitiva que fornece resultados atuali
 - Distribuição de números pares e ímpares
 - Análise por dezenas e intervalos
 - Tendências históricas
+
+![WebLoto Estatísticas](./assets/screem_estat.png)
+
+![WebLoto Histo](./assets/screem_hist.png)
+
 
 ### Interface Moderna
 - Design clean e intuitivo
