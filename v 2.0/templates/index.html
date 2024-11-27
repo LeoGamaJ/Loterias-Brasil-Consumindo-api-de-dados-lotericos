@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebLoto - Resultados das Loterias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-trophy-fill me-2"></i>
+                WebLoto
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#sobreModal">
+                            <i class="bi bi-info-circle"></i> Sobre
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menu Lateral -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-white sidebar">
+                <div class="position-sticky pt-3">
+                    <div class="list-group" id="loteriasMenu">
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="megasena">
+                            <span class="loteria-icon megasena me-2"></span>
+                            Mega-Sena
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="lotofacil">
+                            <span class="loteria-icon lotofacil me-2"></span>
+                            Lotofácil
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="quina">
+                            <span class="loteria-icon quina me-2"></span>
+                            Quina
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="lotomania">
+                            <span class="loteria-icon lotomania me-2"></span>
+                            Lotomania
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="timemania">
+                            <span class="loteria-icon timemania me-2"></span>
+                            Timemania
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="duplasena">
+                            <span class="loteria-icon duplasena me-2"></span>
+                            Dupla Sena
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="federal">
+                            <span class="loteria-icon federal me-2"></span>
+                            Federal
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="diadesorte">
+                            <span class="loteria-icon diadesorte me-2"></span>
+                            Dia de Sorte
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="supersete">
+                            <span class="loteria-icon supersete me-2"></span>
+                            Super Sete
+                        </button>
+                        <button class="list-group-item list-group-item-action d-flex align-items-center" data-loteria="maismilionaria">
+                            <span class="loteria-icon maismilionaria me-2"></span>
+                            + Milionária
+                        </button>
+                    </div>
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <small class="text-muted">
+                            ⚡ Developed by <a href="https://www.linkedin.com/in/leonardo-gama-jardim/" target="_blank" class="text-decoration-none fw-bold">Leo Gama</a>
+                        </small>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Conteúdo Principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 id="tituloLoteria" class="h2">Selecione uma loteria</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="btnEstatisticas">
+                                <i class="bi bi-bar-chart-fill"></i> Estatísticas
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="btnHistorico">
+                                <i class="bi bi-clock-history"></i> Histórico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading -->
+                <div id="loading" class="text-center my-5 d-none">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                </div>
+
+                <!-- Resultado -->
+                <div id="resultado" class="card shadow-sm d-none">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="info-card">
+                                    <h5><i class="bi bi-info-circle"></i> Informações do Sorteio</h5>
+                                    <p><strong>Concurso:</strong> <span id="concurso"></span></p>
+                                    <p><strong>Data:</strong> <span id="data"></span></p>
+                                    <p><strong>Local:</strong> <span id="local"></span></p>
+                                    <p><strong>Acumulou:</strong> <span id="acumulou"></span></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-card">
+                                    <h5><i class="bi bi-calendar-event"></i> Próximo Sorteio</h5>
+                                    <p><strong>Concurso:</strong> <span id="proximoConcurso"></span></p>
+                                    <p><strong>Data:</strong> <span id="dataProximoConcurso"></span></p>
+                                    <p><strong>Valor Estimado:</strong> <span id="valorEstimado"></span></p>
+                                    <p><strong>Valor Acumulado:</strong> <span id="valorAcumulado"></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dezenas-container mt-4">
+                            <h5><i class="bi bi-dice-6"></i> Dezenas Sorteadas</h5>
+                            <div id="dezenas" class="d-flex flex-wrap gap-2 justify-content-center"></div>
+                        </div>
+
+                        <div class="premiacoes-container mt-4">
+                            <h5><i class="bi bi-trophy"></i> Premiações</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Faixa</th>
+                                            <th>Ganhadores</th>
+                                            <th>Prêmio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="premiacoesBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="info-adicional mt-4">
+                            <h5><i class="bi bi-info-circle"></i> Informações Adicionais</h5>
+                            <p><strong>Valor Arrecadado:</strong> <span id="valorArrecadado"></span></p>
+                            <p><strong>Observação:</strong> <span id="observacao"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas -->
+                <div id="estatisticas" class="d-none">
+                    <div id="mensagemEstatisticas" style="display: none;"></div>
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <div class="alert alert-info mb-4">
+                                <strong>Total de Concursos Analisados:</strong> <span id="totalConcursos">0</span>
+                            </div>
+                            <h5><i class="bi bi-graph-up"></i> Índice de Números Sorteados</h5>
+                            <div class="chart-container" style="position: relative; height:400px;">
+                                <canvas id="graficoFrequencia"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title"><i class="bi bi-pie-chart"></i> Distribuição de Paridade</h6>
+                                    <div class="chart-container" style="position: relative; height:200px;">
+                                        <canvas id="graficoParidade"></canvas>
+                                    </div>
+                                    <div class="mt-3">
+                                        <p class="mb-1"><strong>Números Pares:</strong> <span id="numerosPares"></span></p>
+                                        <p class="mb-1"><strong>Números Ímpares:</strong> <span id="numerosImpares"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4" id="containerGraficoDezenas">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title"><i class="bi bi-bar-chart"></i> Distribuição por Dezenas</h6>
+                                    <div class="chart-container" style="position: relative; height:200px;">
+                                        <canvas id="graficoDezenas"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Histórico -->
+                <div id="historico" class="card shadow-sm mt-4 d-none">
+                    <div class="card-body">
+                        <h5><i class="bi bi-clock-history"></i> Últimos Resultados</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Concurso</th>
+                                        <th>Data</th>
+                                        <th>Dezenas</th>
+                                        <th>Acumulou</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historicoBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensagem de Erro -->
+                <div id="erro" class="alert alert-danger d-none" role="alert"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Sobre -->
+    <div class="modal fade" id="sobreModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sobre o WebLoto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="mb-3">Bem-vindo ao WebLoto!</h4>
+                    <p>O WebLoto é uma aplicação web moderna e intuitiva que fornece resultados atualizados e análises estatísticas das loterias da Caixa Econômica Federal.</p>
+                    
+                    <h5 class="mt-4">🎯 Principais Recursos</h5>
+                    <ul>
+                        <li>Resultados em tempo real dos últimos sorteios</li>
+                        <li>Análise estatística detalhada dos números sorteados</li>
+                        <li>Histórico completo dos últimos concursos</li>
+                        <li>Visualização gráfica da frequência dos números</li>
+                        <li>Distribuição de números pares e ímpares</li>
+                        <li>Interface responsiva para todos os dispositivos</li>
+                    </ul>
+
+                    <h5 class="mt-4">🎲 Modalidades Suportadas</h5>
+                    <ul>
+                        <li>Mega-Sena</li>
+                        <li>Lotofácil</li>
+                        <li>Quina</li>
+                        <li>Lotomania</li>
+                        <li>Timemania</li>
+                        <li>Dupla Sena</li>
+                        <li>Federal</li>
+                        <li>Dia de Sorte</li>
+                        <li>Super Sete</li>
+                        <li>+ Milionária</li>
+                    </ul>
+
+                    <h5 class="mt-4">💡 Como Usar</h5>
+                    <p>Selecione a modalidade desejada no menu lateral para ver:</p>
+                    <ul>
+                        <li>Resultado do último sorteio</li>
+                        <li>Valores de premiação</li>
+                        <li>Estatísticas detalhadas</li>
+                        <li>Histórico dos últimos concursos</li>
+                    </ul>
+
+                    <h5 class="mt-4">🔄 Atualizações</h5>
+                    <p>Os resultados são atualizados automaticamente após cada sorteio através da API oficial das Loterias.</p>
+
+                    <hr class="my-4">
+
+                    <h5 class="mt-4">👤 Author</h5>
+                    <p>Leo Gama</p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-github"></i> GitHub: <a href="https://github.com/LeoGamaJ" target="_blank">@LeoGamaJ</a></li>
+                        <li><i class="bi bi-envelope"></i> Email: <a href="mailto:leo@leogama.cloud">leo@leogama.cloud</a></li>
+                        <li><i class="bi bi-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/leonardo-gama-jardim/" target="_blank">leonardo-gama-jardim</a></li>
+                    </ul>
+
+                    <p class="text-muted mt-4 mb-0">Versão 2.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
